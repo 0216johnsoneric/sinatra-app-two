@@ -3,10 +3,14 @@ require 'pry'
 class RecipesController < ApplicationController
 
     get '/recipes' do
-        if is_logged_in?
+        @recipes = Recipe.all
+        if is_logged_in? && !@recipes.empty?
             @user = current_user
             @recipes = Recipe.all
             erb :'recipes/recipes'
+        elsif @recipes.empty?
+            flash[:alert] = "There are no recipes: Please create a new recipe!"
+            redirect '/'
         else
             redirect '/login'
         end
@@ -48,7 +52,9 @@ class RecipesController < ApplicationController
         if is_logged_in? && @recipe.user_id == current_user.id
             erb :'/recipes/edit'
         else
-            redirect 'login'
+            flash[:alert] = "You cannot edit this recipe!"
+            redirect to '/recipes'
+            # redirect 'login'
         end
     end
 
@@ -60,6 +66,7 @@ class RecipesController < ApplicationController
             @recipe.save
             redirect "recipes/#{@recipe[:id]}"
         else 
+            flash[:alert] = "You cannot edit this recipe!"
             redirect "recipes/#{@recipe[:id]}/edit"
         end
     end
