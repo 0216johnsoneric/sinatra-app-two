@@ -1,0 +1,36 @@
+<style>
+  body{
+      background-image: url(https://previews.123rf.com/images/vicushka/vicushka1602/vicushka160200213/52823712-fresh-seasonal-organic-vegetables-salad-preparation-with-dressings-ingredients-cutlery-and-kitchen-c.jpg);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center center;
+  }
+
+  /* nav.menu {
+     color: black;
+     font-size: 25px;
+  } */
+</style>
+<nav class=menu>
+
+<h1><%=@user.username%>: Here is your Recipe!</h1>
+<br></br>
+<h2>Name</h2>
+<h3><%=@recipe.name%></h3>
+<h2>Ingredients</h2>
+<h3><%=@recipe.content%></h3>
+<br></br>
+
+<form method="POST" action="/recipes/<%= @recipe.id %>/delete">
+<% if is_logged_in? && @recipe.user_id == current_user.id %>
+  <input type="submit" value="Delete Recipe">
+<%end%>
+  <%# <input type="submit" value="Delete Recipe"> %>
+</form>
+<br></br>
+<% if is_logged_in? && @recipe.user_id == current_user.id %>
+<a href="<%= @recipe.id %>/edit"><button>Edit Recipe</button></a>
+<%end%>
+<a href="/recipes"><button>Back to Recipes</button></a>
+
+</nav>

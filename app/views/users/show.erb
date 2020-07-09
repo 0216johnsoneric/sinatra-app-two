@@ -1,0 +1,7 @@
+<h1><%=@user.username%></h1>
+<a href="recipes/new">New Recipe</a>
+<ul><%@user.recipes.each do |recipe|%>
+    <li><%= recipe.name%></li>
+    <li><%=recipe.content%> <br></br> <a href="/recipes/<%=recipe.id%>/edit">Edit</a></li>
+    <%end%>
+</ul>
