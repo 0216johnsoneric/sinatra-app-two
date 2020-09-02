@@ -7,3 +7,5 @@ Install Instructions
 3) Run shotgun and navigate to web server in your browser
 
 Bon Appétit!
+
+<img src="public/images/Screen Shot 2020-09-01 at 10.19.23 PM.png">
